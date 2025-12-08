@@ -59,8 +59,10 @@ const App = () => {
       distractorSyllables.push(...w.syllables.slice(0, 2));
     });
     
-    const allSyllables = [...correctSyllables, ...distractorSyllables];
-    return allSyllables.sort(() => Math.random() - 0.5).slice(0, Math.min(8, correctSyllables.length + 4));
+    const limitedDistractors = distractorSyllables.slice(0, Math.max(4, 8 - correctSyllables.length));
+    
+    const allSyllables = [...correctSyllables, ...limitedDistractors];
+    return allSyllables.sort(() => Math.random() - 0.5);
   };
 
   const [availableSyllables, setAvailableSyllables] = useState(getShuffledSyllables());
